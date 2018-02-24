@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Examples</title>
+
+    <link rel="stylesheet" href="/static/css/examples.css">
+    
+    <script type="text/javascript" src="/static/js/modernizr.js"></script>
+    
+  </head>
+  <body>
+    <div class="main">
+      <section class="intro">
+      <h1>Jared Novack</h1>
+      <p>Jared is a technologist, designer and Mr. Manager from St. Louis — but he lives in Boston nowadays.</p>
+      <nav class="social">
+        <a href="htts://twitter.com/jarednova">Twitter</a>
+        <a href="https://github.com/jarednova">GitHub</a>
+        <a href="mailto:jared@upstatement.com">E-mail</a>
+      </nav>
+    </section>
+
+  <h1>Puppy Examples</h1>
+<p>Welcome to Puppy! This page demonstrates a few features that you might find useful while crafting your next awesome prototype.</p>
+
+<h2>Front Matter Headers</h2>
+<p>YAML data in the header of your content pages are exposed via the <code>current_page</code> variable. For instance, in this template I've defined the following:</p>
+<pre><code>
+names: ['Tito', 'Jared', 'Mike']
+</code></pre>
+
+<p>I can now iterate over these names using a Twig <code>for</code> loop over <code>current_page.names</code>:</p>
+
+<ul>
+    <li>Item # 1: Tito</li>
+    <li>Item # 2: Jared</li>
+    <li>Item # 3: Mike</li>
+  </ul>
+
+<hr />
+
+<h2>Sitemap</h2>
+
+You can access front-matter headers from all of your content pages using the <code>sitemap</code> property.
+
+Pages are indexed by file name relative to the <code>./src/content</code> directory, so you can see the headers for this page by looking at <code>sitemap.examples</code>:
+
+<pre><code>
+object(4) {
+  [title]=> 
+  string(8) "Examples"
+  [menu]=> 
+  bool(false)
+  [names]=> 
+    object(3) {
+    [0]=> 
+    string(4) "Tito"
+    [1]=> 
+    string(5) "Jared"
+    [2]=> 
+    string(4) "Mike"
+  }
+  [path]=> 
+  string(14) "/examples.html"
+}
+
+</code></pre>
+
+The <code>sitemap</code> object stores pages in sub-directories recursively which can be accessed using dot notation. For instance, an `about/index.html` page would be available at `sitemap.about.index`.
+
+<hr />
+
+<h2>Data Fixtures</h2>
+
+<p>If you have any external data that you'd like to reuse across several templates, you can add them as JSON files in the <code>./data</code> directory. This list of Upstatement office locations is pulled from the <code>./data</code> locations file, and exposed via the <code>data.locations</code> template variable:</p>
+
+<ul>
+    <li>Office #1: 319 A Street Boston, MA 02210</li>
+    <li>Office #2: 745 Atlantic Ave, Floor 3 Boston, MA 02111</li>
+    <li>Office #3: 133 Portland Street, 5th Floor Boston, MA 02114</li>
+  </ul>
+
+<p>This is handy for doing things like mocking content from dynamic sources (e.g. WordPress, APIs, etc.), and helps you keep your templates <a href="https://en.wikipedia.org/wiki/Don%27t_repeat_yourself">DRY</a> by eliminating duplicate markup for repeated content blocks.</p>
+
+
+<hr />
+
+<h2>Upbase</h2>
+<p>You elected to include <a href="https://github.com/Upstatement/Upbase">Upbase</a> with this project. It was installed in to the <code>./src/bower_components/</code> directory and added to your Sass load path. You can import it like this in your Sass files:</p>
+<pre><code>
+@import "upbase/scss/upbase";
+</code></pre>
+<p>Here's an Upbase-powered grid for your viewing pleasure:</p>
+<div class="grid grid-3">
+  <div>
+    <div>1</div>
+  </div>
+  <div>
+    <div>2</div>
+  </div>
+  <div>
+    <div>3</div>
+  </div>
+</div>
+
+
+<h2>Modernizr</h2>
+<p>You elected to include <a href="https://modernizr.com/">Modernizr</a> with this project.</p>
+<p>Puppy uses the <a href="https://www.npmjs.com/package/gulp-modernizr">gulp-modernizr plugin</a> to generate a custom build of Modernizr based on feature tests you're actually using in your code.<p>
+<p>An emoji will appear after this paragraph only if your browser supports them.</p>
+<div id="insert-emoji-here"></div>
+
+
+<hr />
+
+<h2>ES2015, ES2016 Support</h2>
+<p>Support for modern JavaScript Syntax and features can be added by selecting ES2015+ during <code>yo puppy</code>. This adds Browserify and Babel to your puppy project. <strong>This means you'll need to import modules in a new way.</strong></p>
+<h3>Import with NPM:</h3>
+<p>If possible, modules should be imported with npm, not bower.</p>
+<ol>
+<li>Check if the module exists as a CommonJS module by searching <a href="https://www.npmjs.com/">npm</a>.</li>
+<li>Install the module with <code>npm install --save &lt;module-name&gt;</code></li>
+<li>Where the module is needed use the <code>import</code> statement. For example, <code>import $ from 'jQuery';</code></li>
+</ol>
+<h3>Import with Bower:</h3>
+<p>If the dependency is unavailable in NPM, you may have to use bower.</p>
+<ol>
+<li><code>bower install --save &lt;your-dependency&gt;</code></li>
+<li>Add a <code>&lt;script&gt;</code> tag referencing the vendor script in <code>layouts/base.twig</code>:</li>
+</ol>
+<pre><code class="html language-html">&lt;!-- build:js /static/js/vendor.js --&gt;
+&lt;script type="text/javascript" src="/bower_components/scrollmagic/scrollmagic/minified/ScrollMagic.min.js"&gt;&lt;/script&gt;
+&lt;!-- endbuild --&gt;</code></pre>
+<ol start="3">
+<li>Where you need to call the dependency, you'll need to access it from the window namespace: ex. <code>window.ScrollMagic</code> Within a module you could assign the dependency to a constant: ex. <code>const Modernizr = window.Modernizr;</code>.</li>
+</ol>
+<h3>Resources</h3>
+<p><a href="https://babeljs.io/">Babel</a>
+<a href="https://github.com/ericdouglas/ES6-Learning">Resources for ES2015</a>
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import">MDN Module Import</a>
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export">MDN Module Export</a></p>
+<hr />
+
+
+
+<h2>Markdown Support!</h2>
+<p>Markdown support is available.</p>
+<p>The following content is pure Markdown...</p>
+<p><a href="https://daringfireball.net/projects/markdown/syntax">Markdown</a> is a way to style text on the web. You control the display of the document; formatting words as bold or italic, adding images, and creating lists are just a few of the things we can do with Markdown. Mostly, Markdown is just regular text with a few non-alphabetic characters thrown in, like <code>#</code> or <code>*</code>.</p>
+<p>Here's a quick reference with the basics:</p>
+<h2>Styling</h2>
+<p><hr/>
+<code>*Italics*</code> or <code>_Italic_</code></p>
+<p><em>Italics</em>, <em>Italic</em></p>
+<p><code>**Bold**</code> or <code>__Bold__</code></p>
+<p><strong>Bold</strong>, <strong>Bold</strong></p>
+<p><code>~~Strikethrough~~</code></p>
+<p><del>Strikethrough</del></p>
+<h2>Headings</h2>
+<p><hr/>
+<code># Heading 1</code></p>
+<h1>Heading 1</h1>
+<p><code>## Heading 2</code></p>
+<h2>Heading 2</h2>
+<p><code>### Heading 3</code></p>
+<h3>Heading 3</h3>
+<p><em>…and so on…</em>_</p>
+<h2>Links</h2>
+<p><hr/>
+<code>[Upstatement](https://upstatement.com)</code></p>
+<p><a href="http://upstatement.com">Upstatement!</a></p>
+<p><code>[Upstatement.com][1]</code> … <code>[1]: https://upstatement.com</code></p>
+<p><a href="https://upstatement.com">Upstatement!</a></p>
+<h2>Images</h2>
+<p><hr/>
+<code>![Image](http://placehold.it/100x100)</code></p>
+<p><img src="http://placehold.it/100x100" alt="Image" /></p>
+<p><code>![Upstatement.com][1]</code> … <code>[1]: http://placehold.it/100x100</code></p>
+<p><img src="http://placehold.it/100x100" alt="Image" /></p>
+<p><em>and with dimensions (width x height)…</em></p>
+<p><code>![Image](http://placehold.it/100x100 =50x50)</code></p>
+<p><img src="http://placehold.it/100x100" alt="Image" width="50" height="50" /></p>
+<p><code>![Image](http://placehold.it/100x* =50x*)</code></p>
+<p><img src="http://placehold.it/100x100" alt="Image" width="50" height="auto" /></p>
+<p><code>![Image](http://placehold.it/100x100 =10%x30em)</code></p>
+<p><img src="http://placehold.it/100x100" alt="Image" width="10%" height="30em" /></p>
+<p><em>and with <code>srcset</code> rules (@suffix?descriptor)…</em></p>
+<p><code>![Image](http://placehold.it/100x100 @100x100)</code></p>
+<p><img src="http://placehold.it/100x100" alt="Image" srcset="http://placehold.it/100x100-100x100 100w" /></p>
+<p><code>![Image](http://placehold.it/100x100 @200x200?2x)</code></p>
+<p><img src="http://placehold.it/100x100" alt="Image" srcset="http://placehold.it/100x100-200x200 2x" /></p>
+<p><code>![Image](http://placehold.it/100x100 @small?100w)</code></p>
+<p><img src="http://placehold.it/100x100" alt="Image" srcset="http://placehold.it/100x100-small 100w" /></p>
+<p><code>![Image](http://placehold.it/100x100 @retina?2x)</code></p>
+<p><img src="http://placehold.it/100x100" alt="Image" srcset="http://placehold.it/100x100-retina 2x" /></p>
+<h2>Paragraphs</h2>
+<p><hr/>
+<em>To create paragraphs, just add a blank line:</em></p>
+<pre><code>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+
+Ut enim ad minim veniam, quis nostrud exercitation ullamco.</code></pre>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+<p>Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
+<p><code>&gt; Blockquote</code></p>
+<blockquote>
+  <p>Blockquote</p>
+</blockquote>
+<h2>Lists</h2>
+<pre><code>* Item 1
+* Item 2</code></pre>
+<ul>
+<li>Item 1</li>
+<li>Item 2</li>
+</ul>
+<pre><code>- Item 1
+- Item 2</code></pre>
+<ul>
+<li>Item 1</li>
+<li>Item 2</li>
+</ul>
+<pre><code>1. Item 1
+2. Item 2</code></pre>
+<ol>
+<li>Item 1</li>
+<li>Item 2</li>
+</ol>
+<h2>Tables (?!)</h2>
+<hr/>
+<pre><code>| h1    |    h2   |      h3 |
+|:------|:-------:|--------:|
+| 100   | [a][X]  | ![b][Y] |
+| *foo* | **bar** | ~~baz~~ |
+
+[X]: https://upstatement.com
+[Y]: http://placehold.it/10x10</code></pre>
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">h1</th>
+<th style="text-align:center;">h2</th>
+<th style="text-align:right;">h3</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">100</td>
+<td style="text-align:center;"><a href="https://upstatement.com">a</a></td>
+<td style="text-align:right;"><img src="http://placehold.it/10x10" alt="b" /></td>
+</tr>
+<tr>
+<td style="text-align:left;"><em>foo</em></td>
+<td style="text-align:center;"><strong>bar</strong></td>
+<td style="text-align:right;"><del>baz</del></td>
+</tr>
+</tbody>
+</table>
+<h2>Other elements</h2>
+<hr/>
+<h3>Horizontal rules, on a new line:</h3>
+<p><code>---</code> or <code>***</code></p>
+<hr/>
+<hr />
+<h3>Inline code, surround with a pair of single backticks, like:</h3>
+<pre><code>`Inline code` with backticks</code></pre>
+<p><code>Inline code</code> with backticks</p>
+<h3>Code block, surround with a pair of 3 backticks (each pair on its own line) to render:</h3>
+<pre><code># Do the thing
+var e = Math.sqrt(m * c);</code></pre>
+<h3>Tasklists</h3>
+<pre><code>- [x] This task is done
+- [ ] This is still pending</code></pre>
+<ul>
+<li class="task-list-item" style="list-style-type: none;"><input type="checkbox" disabled style="margin: 0px 0.35em 0.25em -1.6em; vertical-align: middle;" checked> This task is done</li>
+<li class="task-list-item" style="list-style-type: none;"><input type="checkbox" disabled style="margin: 0px 0.35em 0.25em -1.6em; vertical-align: middle;"> This is still pending</li>
+</ul>
+     </div>
+
+  
+
+<script type="text/javascript" src="/static/js/examples.js"></script>
+
+  </body>
+</html>

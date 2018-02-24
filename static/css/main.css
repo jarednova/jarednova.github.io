@@ -1,0 +1,36 @@
+body {
+  font-family: 'Oswald', sans-serif;
+  background-color: #1d2422;
+  color: #CCC;
+  font-size: 1.2em; }
+
+a {
+  color: #4ae0ae;
+  text-decoration: none; }
+
+p {
+  font-weight: 300; }
+  p:first-of-type {
+    margin-top: 0; }
+
+#work section {
+  margin-bottom: 40px; }
+  #work section h3 {
+    margin-bottom: 5px; }
+
+h1 {
+  font-size: 2em; }
+
+h1, h2, h3, h4 {
+  font-weight: 500; }
+
+.main {
+  margin: auto; }
+  @media (min-width: 400px) {
+    .main {
+      width: 90%; } }
+  @media (min-width: 1000px) {
+    .main {
+      width: 80%; } }
+
+/*# sourceMappingURL=main.css.map */
