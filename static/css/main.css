@@ -8,10 +8,19 @@ a {
   color: #4ae0ae;
   text-decoration: none; }
 
-p {
+p, h6 {
+  font-size: 19.2px;
   font-weight: 300; }
-  p:first-of-type {
-    margin-top: 0; }
+
+h6 {
+  margin-top: 0;
+  margin-bottom: 10px; }
+  h6 .title {
+    font-weight: 500;
+    padding-right: 5px; }
+
+p:first-of-type {
+  margin-top: 0; }
 
 #work section {
   margin-bottom: 40px; }
@@ -24,8 +33,21 @@ h1 {
 h1, h2, h3, h4 {
   font-weight: 500; }
 
+@media (min-width: 800px) {
+  #reading .content {
+    -webkit-column-count: 2;
+       -moz-column-count: 2;
+            column-count: 2; } }
+
+@media (min-width: 1400px) {
+  #reading .content {
+    -webkit-column-count: 3;
+       -moz-column-count: 3;
+            column-count: 3; } }
+
 .main {
-  margin: auto; }
+  margin: auto;
+  padding-bottom: 100px; }
   @media (min-width: 400px) {
     .main {
       width: 90%; } }
