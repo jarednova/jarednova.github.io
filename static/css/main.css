@@ -1,7 +1,6 @@
 body {
   font-family: 'Oswald', sans-serif;
-  background-color: #1d2422;
-  color: #CCC;
+  color: #1d2422;
   font-size: 1.2em; }
 
 a {
@@ -17,7 +16,7 @@ h6 {
   margin-bottom: 10px; }
   h6 .title {
     font-weight: 500;
-    padding-right: 5px; }
+    padding-right: 2px; }
 
 p:first-of-type {
   margin-top: 0; }
@@ -37,7 +36,10 @@ h1, h2, h3, h4 {
   #reading .content {
     -webkit-column-count: 2;
        -moz-column-count: 2;
-            column-count: 2; } }
+            column-count: 2;
+    -webkit-column-gap: 60px;
+       -moz-column-gap: 60px;
+            column-gap: 60px; } }
 
 @media (min-width: 1400px) {
   #reading .content {
