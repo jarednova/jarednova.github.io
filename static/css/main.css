@@ -12,6 +12,12 @@ a {
   a:hover {
     color: #4ae0ae; }
 
+.main-link {
+  font-weight: 600;
+  font-style: italic;
+  font-size: 16px;
+  text-transform: uppercase; }
+
 p, h6 {
   font-size: 19.2px;
   font-weight: 300;
