@@ -3,13 +3,19 @@ body {
   color: #1d2422;
   font-size: 1.2em; }
 
+nav a {
+  margin-right: 10px; }
+
 a {
-  color: #20bd89;
+  color: #23cf95;
   text-decoration: none; }
+  a:hover {
+    color: #4ae0ae; }
 
 p, h6 {
   font-size: 19.2px;
-  font-weight: 300; }
+  font-weight: 300;
+  line-height: 1.4; }
 
 h6 {
   margin-top: 0;
@@ -34,7 +40,8 @@ h1 {
   margin-bottom: 10px; }
 
 h1, h2, h3, h4 {
-  font-weight: 700; }
+  font-weight: 700;
+  line-height: 1.2; }
 
 @media (min-width: 800px) {
   #reading .content {
