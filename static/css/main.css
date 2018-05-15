@@ -65,6 +65,12 @@ h1, h2, h3, h4 {
        -moz-column-count: 3;
             column-count: 3; } }
 
+#talks .title {
+  font-weight: bold; }
+
+.endnote {
+  font-style: italic; }
+
 .main {
   margin: auto;
   padding-bottom: 100px; }
